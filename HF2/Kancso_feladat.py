@@ -1,11 +1,10 @@
 class KancsoFeladat:
-    def __init__(self, ke, c, maximum = (3,5,8)):
+    def __init__(self, ke, c):
         self.kezdo = ke
         self.c = c
         self.Max1 = 3
         self.Max2 = 5
         self.Max3 = 8
-        self.Max = maximum
 
 
     def celteszt(self, a):
@@ -45,9 +44,28 @@ class KancsoFeladat:
         # 3->2
         if a3 != 0 and a2!= self.Max2:
             T = min(a3,self.Max2-a2)
-            gyerekek.append(("1->3",(a1, a2 + T, a3 + T)))
+            gyerekek.append(("1->3",(a1, a2 + T, a3 - T)))
+
+        return gyerekek
+
+
 
 
 
 if __name__ == '__main__':
     feladat = KancsoFeladat((0,0,8),4)
+
+    kancso = feladat.kezdo
+    visited = {kancso}
+
+    while not feladat.celteszt(kancso):
+        operations = feladat.rakovetkezo(kancso)
+
+        for text, state in operations:
+            if state not in visited:
+                kancso = state
+                visited.add(state)
+                print(text, "->",kancso)
+                break
+
+    print("Megoldas: ", kancso)
