@@ -4,7 +4,7 @@ class Kiralynok:
     def __init__(self,ke,c):
         self.kezdo = ke
         self.cel = c
-        self.n = len(ke[0])-1
+        self.n = len(ke[0])
 
 
     def celteszt(self,a):
@@ -14,26 +14,19 @@ class Kiralynok:
         gyerekek = []
         s = t[1]
         a = t[0].copy() #
-        for i in range(1,self.n+2):
+        for i in range(1,self.n+1):
             elofeltetel = True
             if 1 in a[:s-1,i-1]:
                 elofeltetel= False
 
-            m,k = s-2,i-2
-            while m>=0 and k>=0:
-                if a[m,k] == 1:
-                    elofeltetel = False
-                    break
-                m -=1
-                k -=1
-
-            m, k = s - 2, i
-            while m >= 0 and k <= self.n:
-                if a[m,k] == 1:
-                    elofeltetel = False
-                    break
-                m -= 1
-                k += 1
+            if elofeltetel:
+                for m in range(1,s):
+                    for k in range(1,self.n+1):
+                        if a[m-1, k-1] == 1 and abs(m-s) == abs(k-i):
+                            elofeltetel = False
+                            break
+                    if not elofeltetel:
+                        break
 
             if elofeltetel:
                 uj_allpot = a.copy()
