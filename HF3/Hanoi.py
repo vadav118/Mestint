@@ -24,7 +24,5 @@ class Hanoi:
         return gyerekek
 
 
-
-
 if __name__ == "main":
     feladat = Hanoi(([1,2,3,4,5],[],[]),([],[],[1,2,3,4,5]))
